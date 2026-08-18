@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f0d" />
+  <title>مصاريف عطلة سبتمبر</title>
+  <style>
+    :root {
+      --bg: #070a08;
+      --surface: #0d120f;
+      --surface-2: #121914;
+      --border: rgba(196, 255, 112, 0.14);
+      --text: #f6fff0;
+      --muted: #93a095;
+      --accent: #c8ff76;
+      --accent-2: #9bdd48;
+      --danger: #ff6b72;
+      --warning: #ffd36a;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(200,255,118,.10), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(155,221,72,.06), transparent 24%),
+        var(--bg);
+      padding: 18px 14px 110px;
+    }
+
+    button, input { font: inherit; }
+
+    .app {
+      width: min(100%, 760px);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(145deg, rgba(200,255,118,.10), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(200,255,118,.10);
+      filter: blur(30px);
+      left: -55px;
+      bottom: -70px;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(200,255,118,.22);
+      color: var(--accent);
+      background: rgba(200,255,118,.06);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 7vw, 40px);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 8px;
+    }
+
+    .summary-card {
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(13,18,15,.75);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .summary-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .summary-card strong {
+      display: block;
+      font-size: clamp(22px, 6vw, 30px);
+      color: var(--accent);
+      letter-spacing: .3px;
+    }
+
+    .summary-card.actual strong { color: #fff; }
+
+    .progress-wrap { margin-top: 14px; }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      height: 11px;
+      border-radius: 999px;
+      background: #151d17;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.04);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      box-shadow: 0 0 18px rgba(200,255,118,.30);
+      transition: width .35s ease;
+    }
+
+    .section-title {
+      margin: 22px 4px 12px;
+      font-size: 16px;
+      color: #dce7df;
+    }
+
+    .expense-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .expense-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(18,25,20,.98), rgba(10,14,11,.98));
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+      overflow: hidden;
+    }
+
+    .expense-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 18px 12px;
+    }
+
+    .expense-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(200,255,118,.09);
+      border: 1px solid rgba(200,255,118,.18);
+      flex: 0 0 auto;
+      font-size: 21px;
+    }
+
+    .expense-title h2 {
+      font-size: 16px;
+      margin: 0 0 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .expense-title small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .actual-total {
+      text-align: left;
+      flex: 0 0 auto;
+    }
+
+    .actual-total span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+
+    .actual-total strong {
+      color: var(--accent);
+      font-size: 17px;
+    }
+
+    .entry-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 8px 18px 18px;
+    }
+
+    .amount-input {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--text);
+      background: #090d0a;
+      border-radius: 15px;
+      padding: 14px 14px;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    .amount-input:focus {
+      border-color: rgba(200,255,118,.55);
+      box-shadow: 0 0 0 4px rgba(200,255,118,.07);
+    }
+
+    .save-btn {
+      border: none;
+      color: #10150f;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 15px;
+      padding: 0 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(155,221,72,.18);
+      min-height: 50px;
+    }
+
+    .save-btn:active { transform: scale(.98); }
+
+    .entries {
+      border-top: 1px solid rgba(255,255,255,.05);
+      padding: 0 18px 16px;
+    }
+
+    .entries-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .entry-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 0;
+      border-top: 1px dashed rgba(255,255,255,.06);
+    }
+
+    .entry-row:first-of-type { border-top: 0; }
+
+    .entry-value strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .entry-value small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .entry-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+      cursor: pointer;
+    }
+
+    .icon-btn.edit { color: var(--warning); }
+    .icon-btn.delete { color: var(--danger); }
+
+    .empty {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      padding: 10px 0 2px;
+    }
+
+    .footer-actions {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface-2);
+      border-radius: 15px;
+      min-height: 48px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .secondary-btn.danger {
+      color: var(--danger);
+      border-color: rgba(255,107,114,.18);
+    }
+
+    .toast {
+      position: fixed;
+      right: 50%;
+      bottom: 26px;
+      transform: translate(50%, 20px);
+      background: #f5ffe9;
+      color: #121812;
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.38);
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 999;
+      max-width: calc(100% - 30px);
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(50%, 0);
+    }
+
+    dialog {
+      width: min(calc(100% - 28px), 420px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: #0e140f;
+      color: var(--text);
+      padding: 0;
+      box-shadow: var(--shadow);
+    }
+
+    dialog::backdrop {
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content { padding: 20px; }
+    .modal-content h3 { margin: 0 0 8px; }
+    .modal-content p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 700px) {
+      body { padding-top: 34px; }
+      .expense-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .hero { padding: 30px; }
+    }
+
+    @media (max-width: 380px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .expense-head { align-items: flex-start; }
+      .entry-form { grid-template-columns: 1fr; }
+      .save-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div class="eyebrow">✈️ عطلة سبتمبر</div>
+      <h1>متابعة مصاريف العطلة</h1>
+      <p>أضف كل مصروف فور دفعه، وسيتم حساب المجموع وحفظه تلقائياً على جهازك.</p>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span>المجموع المتوقع</span>
+          <strong id="expectedTotal">88,000 دج</strong>
+        </div>
+        <div class="summary-card actual">
+          <span>المجموع الفعلي</span>
+          <strong id="actualTotal">0 دج</strong>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span>نسبة الصرف من الميزانية المتوقعة</span>
+          <strong id="progressText">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-title">تفاصيل المصاريف</h2>
+    <section class="expense-list" id="expenseList"></section>
+
+    <div class="footer-actions">
+      <button class="secondary-btn" id="exportBtn">نسخ الملخص</button>
+      <button class="secondary-btn danger" id="resetBtn">تصفير المصاريف</button>
+    </div>
+  </main>
+
+  <dialog id="editDialog">
+    <form method="dialog" class="modal-content" id="editForm">
+      <h3>تعديل المبلغ</h3>
+      <p>غيّر القيمة ثم اضغط على حفظ التعديل.</p>
+      <input class="amount-input" id="editAmount" type="number" inputmode="numeric" min="1" step="1" required />
+      <div class="modal-actions">
+        <button class="secondary-btn" value="cancel">إلغاء</button>
+        <button class="save-btn" id="confirmEdit" value="default">حفظ التعديل</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORAGE_KEY = 'septemberVacationExpenses_v1';
+
+    const categories = [
+      { id: 'rent', title: 'مصاريف الكراء', subtitle: '5 ليالٍ', expected: 25000, icon: '🏠' },
+      { id: 'food', title: 'مصاريف الأكل', subtitle: '5 أيام', expected: 22000, icon: '🍽️' },
+      { id: 'transport', title: 'مصاريف المواصلات', subtitle: '5 أيام', expected: 3000, icon: '🚕' },
+      { id: 'travel', title: 'مصاريف الذهاب والإياب', subtitle: 'رحلة الذهاب والعودة', expected: 8000, icon: '🚌' },
+      { id: 'extra', title: 'مصاريف زائدة', subtitle: 'احتياط للمصاريف الأخرى', expected: 15000, icon: '🧾' },
+      { id: 'personal', title: 'لي ولمنال', subtitle: 'مصاريف شخصية', expected: 15000, icon: '💚' }
+    ];
+
+    let state = loadState();
+    let editingTarget = null;
+
+    const expenseList = document.getElementById('expenseList');
+    const actualTotalEl = document.getElementById('actualTotal');
+    const expectedTotalEl = document.getElementById('expectedTotal');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const toast = document.getElementById('toast');
+    const editDialog = document.getElementById('editDialog');
+    const editForm = document.getElementById('editForm');
+    const editAmount = document.getElementById('editAmount');
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved && typeof saved === 'object') return saved;
+      } catch (error) {
+        console.warn('تعذر قراءة البيانات المحفوظة:', error);
+      }
+      return Object.fromEntries(categories.map(cat => [cat.id, []]));
+    }
+
+    function normalizeState() {
+      categories.forEach(cat => {
+        if (!Array.isArray(state[cat.id])) state[cat.id] = [];
+      });
+    }
+
+    function saveState(message = 'تم الحفظ') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      showToast(message);
+    }
+
+    function formatMoney(value) {
+      return `${Number(value || 0).toLocaleString('en-US')} دج`;
+    }
+
+    function getCategoryTotal(categoryId) {
+      return (state[categoryId] || []).reduce((sum, item) => sum + Number(item.amount || 0), 0);
+    }
+
+    function getGrandTotal() {
+      return categories.reduce((sum, cat) => sum + getCategoryTotal(cat.id), 0);
+    }
+
+    function getExpectedTotal() {
+      return categories.reduce((sum, cat) => sum + cat.expected, 0);
+    }
+
+    function render() {
+      normalizeState();
+      expenseList.innerHTML = categories.map(renderCard).join('');
+      updateSummary();
+      attachEvents();
+    }
+
+    function renderCard(cat) {
+      const total = getCategoryTotal(cat.id);
+      const items = state[cat.id] || [];
+
+      const entriesHtml = items.length
+        ? items.map((item, index) => `
+            <div class="entry-row">
+              <div class="entry-value">
+                <strong>${formatMoney(item.amount)}</strong>
+                <small>${item.date || 'مصروف مسجل'}</small>
+              </div>
+              <div class="entry-actions">
+                <button class="icon-btn edit" type="button" data-action="edit" data-category="${cat.id}" data-index="${index}" aria-label="تعديل">✏️</button>
+                <button class="icon-btn delete" type="button" data-action="delete" data-category="${cat.id}" data-index="${index}" aria-label="حذف">🗑️</button>
+              </div>
+            </div>`).join('')
+        : '<div class="empty">لم تتم إضافة أي مصاريف بعد</div>';
+
+      return `
+        <article class="expense-card">
+          <div class="expense-head">
+            <div class="expense-title">
+              <div class="icon">${cat.icon}</div>
+              <div>
+                <h2>${cat.title}</h2>
+                <small>${cat.subtitle} • المتوقع ${formatMoney(cat.expected)}</small>
+              </div>
+            </div>
+            <div class="actual-total">
+              <span>المصروف الفعلي</span>
+              <strong>${formatMoney(total)}</strong>
+            </div>
+          </div>
+
+          <form class="entry-form" data-category="${cat.id}">
+            <input class="amount-input" type="number" inputmode="numeric" min="1" step="1" placeholder="أدخل المبلغ المصروف" aria-label="المبلغ المصروف" required />
+            <button class="save-btn" type="submit">حفظ</button>
+          </form>
+
+          <div class="entries">
+            <div class="entries-header">
+              <span>سجل المصاريف</span>
+              <span>${items.length} عملية</span>
+            </div>
+            ${entriesHtml}
+          </div>
+        </article>`;
+    }
+
+    function updateSummary() {
+      const expected = getExpectedTotal();
+      const actual = getGrandTotal();
+      const percent = expected > 0 ? (actual / expected) * 100 : 0;
+
+      expectedTotalEl.textContent = formatMoney(expected);
+      actualTotalEl.textContent = formatMoney(actual);
+      progressText.textContent = `${Math.round(percent)}%`;
+      progressBar.style.width = `${Math.min(percent, 100)}%`;
+
+      if (percent > 100) {
+        progressBar.style.background = 'linear-gradient(90deg, #ff8c66, #ff5d6c)';
+      } else {
+        progressBar.style.background = 'linear-gradient(90deg, var(--accent-2), var(--accent))';
+      }
+    }
+
+    function attachEvents() {
+      document.querySelectorAll('.entry-form').forEach(form => {
+        form.addEventListener('submit', event => {
+          event.preventDefault();
+          const categoryId = form.dataset.category;
+          const input = form.querySelector('input');
+          const amount = Number(input.value);
+
+          if (!Number.isFinite(amount) || amount <= 0) {
+            showToast('أدخل مبلغاً صحيحاً');
+            return;
+          }
+
+          state[categoryId].push({
+            amount,
+            date: new Intl.DateTimeFormat('ar-DZ', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            }).format(new Date())
+          });
+
+          saveState('تمت إضافة المصروف');
+          render();
+        });
+      });
+
+      document.querySelectorAll('[data-action="edit"]').forEach(button => {
+        button.addEventListener('click', () => openEdit(button.dataset.category, Number(button.dataset.index)));
+      });
+
+      document.querySelectorAll('[data-action="delete"]').forEach(button => {
+        button.addEventListener('click', () => deleteEntry(button.dataset.category, Number(button.dataset.index)));
+      });
+    }
+
+    function openEdit(categoryId, index) {
+      const item = state[categoryId]?.[index];
+      if (!item) return;
+      editingTarget = { categoryId, index };
+      editAmount.value = item.amount;
+      editDialog.showModal();
+      setTimeout(() => editAmount.focus(), 100);
+    }
+
+    editForm.addEventListener('submit', event => {
+      const submitterValue = event.submitter?.value;
+      if (submitterValue === 'cancel') return;
+
+      event.preventDefault();
+      const newAmount = Number(editAmount.value);
+      if (!editingTarget || !Number.isFinite(newAmount) || newAmount <= 0) {
+        showToast('أدخل مبلغاً صحيحاً');
+        return;
+      }
+
+      const { categoryId, index } = editingTarget;
+      state[categoryId][index].amount = newAmount;
+      state[categoryId][index].date = `${state[categoryId][index].date || ''} • تم التعديل`;
+      saveState('تم تعديل المبلغ');
+      editDialog.close();
+      editingTarget = null;
+      render();
+    });
+
+    function deleteEntry(categoryId, index) {
+      const item = state[categoryId]?.[index];
+      if (!item) return;
+      const confirmed = confirm(`هل تريد حذف مبلغ ${formatMoney(item.amount)}؟`);
+      if (!confirmed) return;
+      state[categoryId].splice(index, 1);
+      saveState('تم حذف المصروف');
+      render();
+    }
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      const confirmed = confirm('هل تريد تصفير جميع المصاريف الفعلية؟ لا يمكن التراجع عن ذلك.');
+      if (!confirmed) return;
+      state = Object.fromEntries(categories.map(cat => [cat.id, []]));
+      saveState('تم تصفير جميع المصاريف');
+      render();
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', async () => {
+      const lines = [
+        'ملخص مصاريف عطلة سبتمبر',
+        `المجموع المتوقع: ${formatMoney(getExpectedTotal())}`,
+        `المجموع الفعلي: ${formatMoney(getGrandTotal())}`,
+        '',
+        ...categories.map(cat => `${cat.title}: ${formatMoney(getCategoryTotal(cat.id))} من ${formatMoney(cat.expected)}`)
+      ];
+
+      try {
+        await navigator.clipboard.writeText(lines.join('\n'));
+        showToast('تم نسخ الملخص');
+      } catch {
+        showToast('تعذر النسخ على هذا المتصفح');
+      }
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    render();
+  </script>
+</body>
+</html>
